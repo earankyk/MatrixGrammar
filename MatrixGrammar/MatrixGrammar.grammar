@@ -1,0 +1,18 @@
+#reference 'file:MatrixGrammar.MatrixOps.dll';
+#reference 'file:MatrixGrammar.MatrixLearning.dll';
+using MatrixGrammar;
+using MatrixGrammar.MatrixOps;
+using MatrixGrammar.MatrixLearning;
+using semantics MatrixGrammar.MatrixOps.MatrixOps;
+using learners MatrixGrammar.MatrixLearning.MatrixLogic;
+
+language MatrixGrammar;
+
+@complete feature double MatrixFeature = MatrixRanking;
+
+// Your grammar rules here. For example:
+@input int[][] M;
+
+@start int[][] out := expr;
+
+int[][] expr := matPlus(expr, expr) | M;
