@@ -15,4 +15,4 @@ language MatrixGrammar;
 
 @start int[][] out := expr;
 
-int[][] expr := matPlus(expr, expr) | M;
+int[][] expr := matPlus(expr, M) | M;
