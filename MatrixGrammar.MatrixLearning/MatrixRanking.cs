@@ -10,9 +10,20 @@ namespace MatrixGrammar.MatrixLearning
 
         protected override double GetFeatureValueForVariable(VariableNode variable) => 0;
 
-		// Your ranking functions here
+        public static Int32 AbsSumArray(Int32[] arr)
+        {
+            int result = 0;
+            for (int i = 0; i < arr.Length;i++){
+                result += Math.Abs(arr[i]);
+            }
+            return result;
+        }
+
+        // Your ranking functions here
         [FeatureCalculator("matPlus")]
 		double ScoreRegexPosition(double inScore, double rrScore) => rrScore * inScore;
 
+        [FeatureCalculator("A", Method = CalculationMethod.FromLiteral)]
+        double KScore(int[] k) => 1.0 / (AbsSumArray(k));
     }
 }

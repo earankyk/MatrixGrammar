@@ -25,13 +25,13 @@ namespace MatrixGrammar
 
             Console.WriteLine(grammar.Name);
             //var ast = ProgramNode.Parse("matPlus(matPlus(M, M), M))", grammar, ASTSerializationFormat.HumanReadable);
-            Int32[][] inp = new Int32[2][];
-            inp[0] = new Int32[2] {1, 2};
-            inp[1] = new Int32[2] {1, 2};
+            Int32[] inp = new Int32[4]{1,2,1,2};
+            /*inp[0] = new Int32[2] {1, 2};
+            inp[1] = new Int32[2] {1, 2};*/
             var input = State.Create(grammar.InputSymbol, inp);
-            Int32[][] opt = new Int32[2][];
-            opt[0] = new Int32[2] { 2, 4 };
-            opt[1] = new Int32[2] { 2, 4 };
+            Int32[] opt = new Int32[4]{10,20,10,20};
+            /*opt[0] = new Int32[2] { 2, 4 };
+            opt[1] = new Int32[2] { 2, 4 };*/
             var spec = new ExampleSpec(new Dictionary<State, object> { [input] = opt });
             //var engine = new SynthesisEngine(grammar);
             var engine = new SynthesisEngine(grammar, new SynthesisEngine.Config
@@ -42,7 +42,7 @@ namespace MatrixGrammar
     }
             });
             ProgramSet learned = engine.LearnGrammar(spec);
-            Console.Write(learned.IsEmpty);
+            Console.Write(learned.ToString());
             //Int32[][] output = (Int32[][]) ast.Invoke(input);
             //Console.Write(output);
         }
