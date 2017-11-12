@@ -22,16 +22,24 @@ namespace MatrixGrammar
             var parseResult = DSLCompiler.ParseGrammarFromFile("MatrixGrammar.grammar");
             parseResult.TraceDiagnostics();
             var grammar = parseResult.Value;
-
             Console.WriteLine(grammar.Name);
             //var ast = ProgramNode.Parse("matPlus(matPlus(M, M), M))", grammar, ASTSerializationFormat.HumanReadable);
-            Int32[] inp = new Int32[4]{1,2,1,2};
-            /*inp[0] = new Int32[2] {1, 2};
-            inp[1] = new Int32[2] {1, 2};*/
+            //double[] inp = new double[] { 2, 2, 1, 2, 3, 4 };
+            System.Random random = new System.Random();
+            double[] inp = new double[10002];
+            double[] opt = new double[10002];
+            inp[0] = 100;
+            inp[1] = 100;
+            opt[0] = 100;
+            opt[1] = 100;
+            for (int i = 2; i < 10002; i++)
+            {
+                double val = random.NextDouble();
+                inp[i] = val; // NextDouble already returns double from [0,1)
+                opt[i] = 2 * val;
+            }
+            //double[] opt = new double[] { 2, 2, 2, 4, 6, 8 };
             var input = State.Create(grammar.InputSymbol, inp);
-            Int32[] opt = new Int32[4]{10,20,10,20};
-            /*opt[0] = new Int32[2] { 2, 4 };
-            opt[1] = new Int32[2] { 2, 4 };*/
             var spec = new ExampleSpec(new Dictionary<State, object> { [input] = opt });
             //var engine = new SynthesisEngine(grammar);
             var engine = new SynthesisEngine(grammar, new SynthesisEngine.Config
@@ -42,9 +50,7 @@ namespace MatrixGrammar
     }
             });
             ProgramSet learned = engine.LearnGrammar(spec);
-            Console.Write(learned.ToString());
-            //Int32[][] output = (Int32[][]) ast.Invoke(input);
-            //Console.Write(output);
+            Console.Write(learned.Size);
         }
     }
 }

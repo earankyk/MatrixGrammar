@@ -11,10 +11,13 @@ language MatrixGrammar;
 @complete feature double MatrixFeature = MatrixRanking;
 
 // Your grammar rules here. For example:
-@input int[] M;
 
-@start int[] out := expr;
+@input double[] M;
 
-int[] expr := matPlus(expr, M) | A;
+@start double[] out := expr;
 
-int[] A;
+double[] expr := matMult(expr, M) | matMultScalar(n, M) | matPlus(expr, M) | A;
+
+double[] A;
+
+double n;

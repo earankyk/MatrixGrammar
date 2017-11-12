@@ -25,5 +25,14 @@ namespace MatrixGrammar.MatrixLearning
 
         [FeatureCalculator("A", Method = CalculationMethod.FromLiteral)]
         double KScore(int[] k) => 1.0 / (AbsSumArray(k));
+
+        [FeatureCalculator("matMultScalar")]
+        double ScoreMatMultScalar(double inScore, double rrScore) => rrScore * inScore;
+
+        [FeatureCalculator("n", Method = CalculationMethod.FromLiteral)]
+        double nScore(int n) => 1.0;// CHECK THIS
+
+        [FeatureCalculator("matMult")]
+        double ScoreMatMult(double inScore, double rrScore) => rrScore * inScore;
     }
 }
